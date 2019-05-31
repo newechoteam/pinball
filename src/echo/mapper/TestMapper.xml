@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- 不用我们管理数据库 的连接与释放，mybatis在帮我们管理，开发的时候专注于SQL语句就ok -->
+<!-- namespace值指向此xml文件对应的接口类 -->
+<mapper namespace="echo.mapper.TestMapper">
+	
+	<!-- 
+		id值对应接口类里的函数名  
+		#{...}中使接口中传过来的参数名:
+			直接使用相同参数名就行，如果参数名不相同，接口中用@Param标记
+			如果接口中传过来的是一个类 (Test)，那直接使用类的属性就行 (testId, testName)
+		parameterType:传参类型
+		resultType：数据库里取出来值的返回值类型
+	-->
+	<insert id="insertTest">
+		insert into pb_test(testId, testName) values(#{testId}, #{testName})	
+	</insert>
+	
+	<select id="getTestbyId" parameterType="int" resultType="test">
+		select * from pb_test where testId = #{testId}
+	</select>
+	
+</mapper>
